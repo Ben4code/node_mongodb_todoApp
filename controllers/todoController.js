@@ -1,9 +1,9 @@
-let items = [
-    {item: 'get milk'},
-    {item: 'walk dog'},
-    {item: 'feed cat'},
-    {item: 'write code'}
-];
+// let items = [
+//     {item: 'get milk'},
+//     {item: 'walk dog'},
+//     {item: 'feed cat'},
+//     {item: 'write code'}
+// ];
 
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -22,27 +22,31 @@ let todoSchema = new mongoose.Schema({
 //DB Model
 let Todo = mongoose.model('Todo', todoSchema);
 
-let itemOne = Todo({item: 'Feed the cat'}).save((err)=>{
-    if(err) throw err 
-    console.log('item saved');
-})
 
 module.exports = (app)=>{
 
     app.get('/', (req, res)=>{
-        res.render('todo', {todos: items});
+        //get data from mongodb
+        Todo.find({}, (err, items)=>{
+            if(err) throw err;
+            res.render('todo', {todos: items});
+        });
     });
 
     app.post('/todo', urlencodedParser, (req, res)=>{
-        items.push(req.body);
-        res.json(items);
+        //get data from view and add to mongodb
+        let itemOne = Todo(req.body).save((err, items)=>{
+            if(err) throw err 
+            res.json(items);
+        });
     });
 
     app.delete('/todo/:item', (req, res)=>{
-        items = items.filter((todo)=>{
-            return todo.item.replace(/ /g, '-') !== req.params.item;
+        //Delete the item from mongodb
+        Todo.find({item: req.params.item.replace(/\-/g, ' ')}).remove((err, items)=>{
+            if(err) throw err;
+            res.json(items);
         });
-        res.json(items);
     });
 
 };
