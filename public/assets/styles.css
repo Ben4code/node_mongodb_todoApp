@@ -1,0 +1,70 @@
+body{
+    margin: 20px;
+    padding: 10px;
+    font-family: 'Open sans', sans-serif;
+}
+
+nav li{
+    list-style: none;
+    text-transform: capitalize;
+    display: inline-block;
+    margin-right: 20px;
+    background-color: teal;
+    padding: 20px;
+
+}
+
+a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+}
+.input-field{
+    padding: 10px;
+    display: inline;
+}
+.input-field input[type='text'], 
+.input-field input[type='email']{
+    border: 1px solid teal;
+    outline: none;
+    padding: 10px;
+    border-radius: 20px;
+    display: block;
+    width: 300px;
+    transition: all .3s ease;
+}
+.input-field input:focus{
+    border: 2px solid teal;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);   
+}
+
+button{
+    border: 1px solid teal;
+    outline: none;
+    padding: 10px;
+    border-radius: 20px;
+    display: block;
+    color: #fff;
+    background-color: teal;
+}
+button:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);   
+}
+.list{
+    background-color: teal;
+    lighting-color: 1;
+    padding: 20px;
+    color: #fff;
+    width: 50%;
+    border-radius: 20px;
+}
+.list li{
+    list-style: none;
+    text-transform: capitalize;
+    cursor: pointer;
+
+}
+.list li:hover{
+    text-decoration: line-through;
+}
