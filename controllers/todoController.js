@@ -5,8 +5,27 @@ let items = [
     {item: 'write code'}
 ];
 
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+//Connect to db
+mongoose.connect(
+"mongodb://todo_user:todo_user1@ds023694.mlab.com:23694/todo_app"
+);
+
+//Create a schema
+let todoSchema = new mongoose.Schema({
+    item: String
+});
+
+//DB Model
+let Todo = mongoose.model('Todo', todoSchema);
+
+let itemOne = Todo({item: 'Feed the cat'}).save((err)=>{
+    if(err) throw err 
+    console.log('item saved');
+})
 
 module.exports = (app)=>{
 
